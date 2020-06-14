@@ -12,6 +12,9 @@ class User < ApplicationRecord
   validates_uniqueness_of   :email
   validates_uniqueness_of   :username
 
+  has_many :enrollments
+  has_many :courses, through: :enrollments
+
   # This method gives us a simple call to check if a user has permission to modify.
   def can_modify_user?(user_id)
     role == 'admin' || id.to_s == user_id.to_s
